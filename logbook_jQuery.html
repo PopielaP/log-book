@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Diving logBook</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <style>
+        body{
+            background-color: #f2f2f2;
+        }
+        h4{
+            text-align: center;
+            padding-top: 20px;
+            padding-bottom: 10px;
+        }
+        h2{
+            text-align: center;
+            padding-bottom: 20px;
+        }
+        .headerHide{
+          text-align: left;
+        }
+        .head{
+          font-weight: bold;
+          background-color: #d6e9c6;
+          padding: 2px;
+          margin: 2px;
+        }
+        .head:hover{
+          background-color: white;
+        }
+        .iconSmall{
+          font-size: 20px;
+        }
+
+        .panel.with-nav-tabs{
+          margin-top: 10px;
+        }
+        .panel.with-nav-tabs .panel-heading{
+            padding: 5px 5px 0 5px;
+        }
+        .panel.with-nav-tabs .nav-tabs{
+        	border-bottom: none;
+        }
+        .panel.with-nav-tabs .nav-justified{
+        	margin-bottom: -1px;
+        }
+        .panel.with-nav-tabs .panel-body{
+        	background-color: #f1f5ed;
+        }
+
+        .with-nav-tabs.panel-success .nav-tabs > li > a,
+        .with-nav-tabs.panel-success .nav-tabs > li > a:hover,
+        .with-nav-tabs.panel-success .nav-tabs > li > a:focus {
+        	color: #3c763d;
+        }
+
+        .with-nav-tabs.panel-success .nav-tabs > .open > a,
+        .with-nav-tabs.panel-success .nav-tabs > .open > a:hover,
+        .with-nav-tabs.panel-success .nav-tabs > .open > a:focus,
+        .with-nav-tabs.panel-success .nav-tabs > li > a:hover,
+        .with-nav-tabs.panel-success .nav-tabs > li > a:focus {
+        	color: #3c763d;
+        	background-color: #d6e9c6;
+        	border-color: transparent;
+        }
+
+        .with-nav-tabs.panel-success .nav-tabs > li.active > a,
+        .with-nav-tabs.panel-success .nav-tabs > li.active > a:hover,
+        .with-nav-tabs.panel-success .nav-tabs > li.active > a:focus {
+        	color: #3c763d;
+        	background-color: #f1f5ed;
+        	border-color: #d6e9c6;
+        	border-bottom-color: transparent;
+        }
+
+    </style>
+</head>
+
+<body>
+
+
+<div class="container col-lg-4 col-lg-offset-4">
+  <div class="panel with-nav-tabs panel-success">
+    <div class="panel-heading">
+      <h2><img src="img/logbook/logbook.png"></h2>
+
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#dives">Dives</a></li>
+            <li><a data-toggle="tab" href="#newdive">New dive</a></li>
+            <li><a data-toggle="tab" href="#edit">Edit dive</a></li>
+        </ul>
+    </div>
+
+
+    <div class="panel-body">
+    <div class="tab-content">
+
+        <div id="dives" class="tab-pane fade in active">
+            <h4>Dives</h4>
+            <div id="allDives"></div>
+            <br><br>
+            <center><button class="btn btn-default" id="reset">Delete all dives</button></center>
+        </div>
+
+
+        <div id="edit" class="tab-pane fade">
+          <h4>Edit your dive</h4>
+            <div class="form-group col-lg-4">
+              <label for="date">Chose dive number</label>
+              <input type="number" class="form-control" id="editDivenr">
+            </div>
+            <div class="form-group col-lg-6 col-lg-offset-2">
+              <label for="editDate">Date</label>
+              <input type="date" class="form-control" id="editDate">
+            </div>
+            <div class="form-group col-lg-4">
+
+            </div>
+            <div class="form-group col-lg-6 col-lg-offset-2">
+                <label for="editPlace">Location</label>
+                <input type="text" class="form-control" id="editPlace">
+            </div>
+
+          <div class="form-group col-lg-2">
+              <label>Water</label>
+          </div>
+          <div class="form-group col-lg-2">
+              <label class="radio-inline"><input type="radio" name="editWater" value="Sweet water">Sweet</label>
+          </div>
+          <div class="form-group col-lg-2">
+              <label class="radio-inline"><input type="radio" name="editWater" value="Salt water">Salt</label>
+          </div>
+          <div class="form-group col-lg-6">
+              <label for="visibility">Visibility</label>
+              <label class="radio-inline"><input type="radio" name="editVisibility" value="Good"><i class="fa fa-smile-o iconSmall"></i></label>
+              <label class="radio-inline"><input type="radio" name="editVisibility" value="Enough"><i class="fa fa-meh-o iconSmall"></i></label>
+              <label class="radio-inline"><input type="radio" name="editVisibility" value="Bad"><i class="fa fa-frown-o iconSmall"></i></label>
+              <input type="number" class="form-control" id="editVisibilityMeters" placeholder="meters">
+          </div>
+
+          <div class="form-group col-lg-12"></div>
+
+
+          <div class="form-group col-lg-4">
+              <label for="depth">Depth</label>
+              <input type="number" class="form-control" id="editDepth" placeholder="meters">
+          </div>
+          <div class="form-group col-lg-4">
+              <label for="time">Time</label>
+              <input type="number" class="form-control" id="editTime" placeholder="minutes">
+          </div>
+          <div class="form-group col-lg-4">
+              <label for="temp">Temp.</label>
+              <input type="number" class="form-control" id="editTemp" placeholder="temperature">
+          </div>
+
+          <div class="form-group col-lg-4">
+              <label for="tank">Tank</label>
+              <input type="text" class="form-control" id="editTank" placeholder="e.g. 1x15">
+          </div>
+          <div class="form-group col-lg-4">
+              <label for="suit">Suit</label>
+              <input type="text" class="form-control" id="editSuit" placeholder="e.g. 5+5mm">
+          </div>
+          <div class="form-group col-lg-4">
+              <label for="weight">Weight</label>
+              <input type="number" class="form-control" id="editWeight" placeholder="kg">
+          </div>
+
+          <div class="form-group col-lg-12">
+              <label for="comments">Comments</label>
+              <textarea class="form-control" id="editComments"></textarea>
+          </div>
+          <div class="form-group col-lg-2 col-lg-offset-5">
+              <button class="btn btn-default" id="update">Update</button>
+          </div>
+        </div>
+
+
+
+
+
+
+        <div id="newdive" class="tab-pane fade">
+            <h4 text-align="center">Add new dive</h4>
+            <div class="form-group col-lg-4">
+              <h2><div id="divenr"></div><img src="img/logbook/dive.png"></h2>
+
+            </div>
+            <div class="form-group col-lg-6 col-lg-offset-2">
+              <label for="date">Date</label>
+              <input type="date" class="form-control" id="date">
+            </div>
+
+            <div class="form-group col-lg-6 col-lg-offset-2">
+                <label for="place">Location</label>
+                <input type="text" class="form-control" id="place">
+            </div>
+
+            <div class="col-lg-12"></div>
+
+            <div class="form-group col-lg-2">
+                <label>Water</label>
+            </div>
+            <div class="form-group col-lg-2">
+                <label class="radio-inline"><input type="radio" name="water" value="Sweet water">Sweet</label>
+            </div>
+            <div class="form-group col-lg-2">
+                <label class="radio-inline"><input type="radio" name="water" value="Salt water">Salt</label>
+            </div>
+            <div class="form-group col-lg-6">
+                <label for="visibility">Visibility</label>
+                <label class="radio-inline"><input type="radio" name="visibility" value="Good"><i class="fa fa-smile-o iconSmall"></i></label>
+                <label class="radio-inline"><input type="radio" name="visibility" value="Enough"><i class="fa fa-meh-o iconSmall"></i></label>
+                <label class="radio-inline"><input type="radio" name="visibility" value="Bad"><i class="fa fa-frown-o iconSmall"></i></label>
+                <input type="number" class="form-control" id="visibilityMeters" placeholder="meters">
+            </div>
+
+            <div class="form-group col-lg-12"></div>
+
+
+            <div class="form-group col-lg-4">
+                <label for="depth">Depth</label>
+                <input type="number" class="form-control" id="depth" placeholder="meters">
+            </div>
+            <div class="form-group col-lg-4">
+                <label for="time">Time</label>
+                <input type="number" class="form-control" id="time" placeholder="minutes">
+            </div>
+            <div class="form-group col-lg-4">
+                <label for="temp">Temp.</label>
+                <input type="number" class="form-control" id="temp" placeholder="temperature">
+            </div>
+
+            <div class="form-group col-lg-4">
+                <label for="tank">Tank</label>
+                <input type="text" class="form-control" id="tank" placeholder="e.g. 1x15">
+            </div>
+            <div class="form-group col-lg-4">
+                <label for="suit">Suit</label>
+                <input type="text" class="form-control" id="suit" placeholder="e.g. 5+5mm">
+            </div>
+            <div class="form-group col-lg-4">
+                <label for="weight">Weight</label>
+                <input type="number" class="form-control" id="weight" placeholder="kg">
+            </div>
+
+            <div class="form-group col-lg-12">
+                <label for="comments">Comments</label>
+                <textarea class="form-control" id="comments"></textarea>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-default col-lg-2 col-lg-offset-5" id="save">SAVE</button>
+            </div>
+        </div>
+
+    </div>
+  </div>
+  </div>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script>
+  $(document).ready(
+    function() {
+      var alldives = [];
+
+      //localStorage.removeItem("alldives");
+
+      if(localStorage.getItem('alldives')) {
+        alldives = JSON.parse(localStorage.getItem('alldives'));
+      }
+      $("#divenr").text(alldives.length+1);
+
+//--------------------list all dives---------------------------------------------------------------------------------------------------------------------
+      function listDives() {
+        var text = [];
+
+        for (var i=(alldives.length-1); i > -1; i--) {
+          text.push("<div class='headerHide'><div class='head'><strong><img src='img/logbook/dive_small.png'>"+alldives[i].divenr
+          +"</strong>&nbsp&nbsp&nbsp Date: "+alldives[i].date+"&nbsp&nbsp&nbsp "+alldives[i].place+"</div>"
+          +"<table class='table table-striped toHide' style='display:none'><tr><td>"+alldives[i].water+"</td><td colspan='2'>"
+          +alldives[i].visibility+" visibility - "+alldives[i].visibilityMeters+" meters</td></tr>"
+          +"<tr><td>Depth: "+alldives[i].depth+" meters</td><td>Time: "+alldives[i].time+" minutes</td><td>Temperature: "+alldives[i].temp+"</td></tr>"
+          +"<tr><td>Tank: "+alldives[i].tank+"</td><td>Suit: "+alldives[i].suit+"</td><td>Weight: "+alldives[i].weight+" kg</td></tr>"
+          +"<tr><td colspan='3'>Comments:<br>"+alldives[i].comments+"</td></tr></table></div>");
+        }
+
+        $("#allDives").html(text);
+        $(".headerHide").click(
+          function() {
+            $(this).find(".toHide").toggle();
+          }
+        )
+      }
+      listDives();
+//--------------------edit dives-------------------------------------------------------------------------------------------------------------------------
+      $("#editDivenr").click(
+        function() {
+          i = parseInt($("#editDivenr").val());
+          i--;
+
+          //i = i-1;
+          if(parseInt($("#editDivenr").val())>-1 && parseInt($("#editDivenr").val())<(alldives.length+1)) {
+            $("#text1").text(i);
+            $('#editDate').val(alldives[i].date);
+            $('#editPlace').val(alldives[i].place);
+            //$('input[name=editWater]:checked').val(alldives[i].water);
+            if(alldives[i].water == "Sweet water") {$('input:radio[name="editWater"]').filter('[value="Sweet water"]').attr('checked', true);}
+            else if(alldives[i].water == "Salt water") {$('input:radio[name="editWater"]').filter('[value="Salt water"]').attr('checked', true);}
+            else {$('input:radio[name="editWater"]').attr('checked', false);}
+
+            if(alldives[i].visibility == "Good") {$('input:radio[name="editVisibility"]').filter('[value="Good"]').attr('checked', true);}
+            else if(alldives[i].visibility == "Enough") {$('input:radio[name="editVisibility"]').filter('[value="Enough"]').attr('checked', true);}
+            else if(alldives[i].visibility == "Bad") {$('input:radio[name="editVisibility"]').filter('[value="Bad"]').attr('checked', true);}
+            else {$('input:radio[name="editVisibility"]').attr('checked', false);}
+            //$('input[name=editVisibility]:checked').val();
+            $('#editVisibilityMeters').val(alldives[i].visibilityMeters);
+            $('#editDepth').val(alldives[i].depth);
+            $('#editTime').val(alldives[i].time);
+            $('#editTemp').val(alldives[i].temp);
+            $('#editTank').val(alldives[i].tank);
+            $('#editSuit').val(alldives[i].suit);
+            $('#editWeight').val(alldives[i].weight);
+            $('#editComments').val(alldives[i].comments);
+
+            $("#update").click(
+              function() {
+                var dive = {};
+
+                dive.divenr = $("#editDivenr").val();
+                dive.date = $('#editDate').val();
+                dive.place = $('#editPlace').val();
+                dive.water = $('input[name=editWater]:checked').val();
+                dive.visibility = $('input[name=editVisibility]:checked').val();
+                dive.visibilityMeters = $('#editVisibilityMeters').val();
+                dive.depth = $('#editDepth').val();
+                dive.time = $('#editTime').val();
+                dive.temp = $('#editTemp').val();
+                dive.tank = $('#editTank').val();
+                dive.suit = $('#editSuit').val();
+                dive.weight = $('#editWeight').val();
+                dive.comments = $('#editComments').val();
+                if (dive.date =="" || dive.date==undefined){dive.date="---"}
+                if (dive.place =="" || dive.place==undefined){dive.place="--"}
+                if (dive.water =="" || dive.water==undefined){dive.water="--"}
+                if (dive.visibility =="" || dive.visibility==undefined){dive.visibility=""}
+                if (dive.visibilityMeters =="" || dive.visibilityMeters==undefined){dive.visibilityMeters="--"}
+                if (dive.depth =="" || dive.depth==undefined){dive.depth="--"}
+                if (dive.time =="" || dive.time==undefined){dive.time="--"}
+                if (dive.temp =="" || dive.temp==undefined){dive.temp="--"}
+                if (dive.tank =="" || dive.tank==undefined){dive.tank="--"}
+                if (dive.suit =="" || dive.suit==undefined){dive.suit="--"}
+                if (dive.weight =="" || dive.weight==undefined){dive.weight="--"}
+
+                alldives[dive.divenr-1]=dive;
+                //$("#divenr").text(alldives.length+1);
+
+                localStorage.setItem('alldives', true);
+                localStorage.setItem('alldives', JSON.stringify(alldives));
+                alldives = JSON.parse(localStorage.getItem('alldives'));
+
+                var text = [];
+                for (var i=0; i < alldives.length; i++) {
+                  text[i] = alldives[i].divenr;
+                }
+
+                listDives();
+                $("#test").text(text);
+
+                //console.log(dive);
+                //console.log(alldives);
+
+              }
+            )
+
+          }
+          else {
+
+            var dNr = parseInt($("#editDivenr").val());
+            if(dNr>0){
+              allnr = alldives.length;
+              dNr = allnr--;
+            } else dNr = 1;
+
+            $("#editDivenr").val(dNr);
+            //console.log($("#editDivenr").val());
+            alert("Wrong dive number!");
+          }
+
+        }
+    )
+
+
+//--------------------save function for new dive---------------------------------------------------------------------------------------------------------
+
+      $("#save").click(
+        function() {
+          var dive = {};
+
+          dive.divenr = $("#divenr").text();
+          dive.date = $('#date').val();
+          dive.place = $('#place').val();
+          dive.water = $('input[name=water]:checked').val();
+          dive.visibility = $('input[name=visibility]:checked').val();
+          dive.visibilityMeters = $('#visibilityMeters').val();
+          dive.depth = $('#depth').val();
+          dive.time = $('#time').val();
+          dive.temp = $('#temp').val();
+          dive.tank = $('#tank').val();
+          dive.suit = $('#suit').val();
+          dive.weight = $('#weight').val();
+          dive.comments = $('#comments').val();
+          if (dive.date =="" || dive.date==undefined){dive.date="---"}
+          if (dive.place =="" || dive.place==undefined){dive.place="--"}
+          if (dive.water =="" || dive.water==undefined){dive.water="--"}
+          if (dive.visibility =="" || dive.visibility==undefined){dive.visibility=""}
+          if (dive.visibilityMeters =="" || dive.visibilityMeters==undefined){dive.visibilityMeters="--"}
+          if (dive.depth =="" || dive.depth==undefined){dive.depth="--"}
+          if (dive.time =="" || dive.time==undefined){dive.time="--"}
+          if (dive.temp =="" || dive.temp==undefined){dive.temp="--"}
+          if (dive.tank =="" || dive.tank==undefined){dive.tank="--"}
+          if (dive.suit =="" || dive.suit==undefined){dive.suit="--"}
+          if (dive.weight =="" || dive.weight==undefined){dive.weight="--"}
+
+          alldives.push(dive);
+          $("#divenr").text(alldives.length+1);
+
+          localStorage.setItem('alldives', true);
+          localStorage.setItem('alldives', JSON.stringify(alldives));
+          alldives = JSON.parse(localStorage.getItem('alldives'));
+
+          var text = [];
+          for (var i=0; i < alldives.length; i++) {
+            text[i] = alldives[i].divenr;
+          }
+          location.reload();
+          //listDives();
+          //$("#newdive").reset();
+          $("#test").text(text);
+
+
+          console.log(dive);
+          console.log(alldives);
+
+        }
+      )
+
+//---------------------delete all dives---------------------------------------------------------------------------------------------------------------------
+
+      $("#reset").click(
+        function() {
+          if (confirm('Are you sure? You will lose all your dives')) {
+            localStorage.removeItem("alldives");
+            location.reload();
+            listDives();
+          }
+        }
+      )
+
+    }
+
+
+  )
+</script>
+
+</body>
+</html>
